@@ -1,5 +1,5 @@
 const users = []
-const newuser = []
+const rooms = []
 
 const randomUsernames = []
 const lineReader = require('line-reader');
@@ -50,6 +50,13 @@ const addUser = ({ id, username, room}) => {
     const user = { id, username, displayName, room }
 
     users.push(user)
+
+    // Create a new room
+    if (!rooms.find((room) => {
+        return room == user.room
+    })) {
+        rooms.push(user.room)
+    }    
     
     return { user }
 }
