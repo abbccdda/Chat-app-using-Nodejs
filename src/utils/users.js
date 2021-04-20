@@ -1,12 +1,19 @@
 const users = []
 const newuser = []
-const addUser = ({ id, username, room }) => {
+
+const randomUsernames = []
+const lineReader = require('line-reader');
+lineReader.eachLine('./resources/random-usernames.dat', function(line) {
+    randomUsernames.push(line)
+});
+
+const addUser = ({ id, username, room}) => {
     //clean the data
 
     username = username.trim().toLowerCase()
     room = room.trim().toLowerCase()
 
-    //vlidate data
+    //validate data
     if (!username || !room) {
         return {
             error: 'Username and room are required!'
@@ -18,16 +25,32 @@ const addUser = ({ id, username, room }) => {
         return user.room == room && user.username == username
     })
 
-    //va;idate username
+    //validate username
     if (existingUser) {
         return {
-            error: "username iss already used"
+            error: "username ${userName} already used"
+        }
+    }
+
+   
+    var displayName = null
+    while (displayName == null) {
+        const randIndex = Math.floor(Math.random() * randomUsernames.length)
+        const newDisplayName = randomUsernames[randIndex]
+        const nameUsedUsers = users.find((user) => {
+            return user.displayName == newDisplayName
+        })    
+
+        if (!nameUsedUsers) {
+            displayName = newDisplayName
         }
     }
 
     //store user
-    const user = { id, username, room }
+    const user = { id, username, displayName, room }
+
     users.push(user)
+    
     return { user }
 }
 
