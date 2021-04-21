@@ -59,6 +59,14 @@
     </script>
 
     <script id="user-rooms" type="text/html">
+      <h3 class="list-title">Current Open Rooms</h3>
+
+      <ul class="rooms">
+        {{#rooms}}
+        <li> <a href="/chat.html?room={{.}}&username={{username}}">#{{.}}</a> </li>
+        {{/rooms}}
+      </ul>
+
       <h2 class="room-title">Room {{room}}</h2>
       <h3 class="list-title">Users</h3>
 
@@ -68,18 +76,14 @@
         {{/users}}
       </ul>
 
-      <h3 class="list-title">Open Rooms {{username}}</h3>
-
-      <form action="/chat.html">
-        <!-- <input type="hidden" name="username">{{username}}</input><br/> -->
+      <!-- <form action="/chat.html">
         {{#rooms}}
           <input type='radio' name='room' value={{.}}>{{.}}</input/><br/>
         {{/rooms}}
         
         <input type="text" name="username" autocomplete="off" placeholder="{{username}}" value="{{username}}" />
         <button>Join</button>
-      </form>
-
+      </form> -->
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
