@@ -59,7 +59,7 @@ socket.on("locationurl", (loc) => {
     autoscroll()
 })
 
-socket.on("roomData", ({ room, users }) => {
+socket.on("roomData", ({ room, users, username }) => {
     const roomSet = new Set()
     users.forEach((user) => {
         roomSet.add(user.room)
@@ -69,7 +69,8 @@ socket.on("roomData", ({ room, users }) => {
     const html = Mustache.render(sidebartemplate, {
         room,
         users,
-        rooms
+        rooms,
+        username
     })
     document.querySelector('#sidebar').innerHTML = html
 })

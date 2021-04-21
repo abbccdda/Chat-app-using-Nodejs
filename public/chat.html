@@ -68,15 +68,17 @@
         {{/users}}
       </ul>
 
-      <h3 class="list-title">Open Rooms</h3>
+      <h3 class="list-title">Open Rooms {{username}}</h3>
 
-      <!-- <form action="/chat.html">
-        <input type="hidden" name="username">{{username}}</input><br/>
+      <form action="/chat.html">
+        <!-- <input type="hidden" name="username">{{username}}</input><br/> -->
         {{#rooms}}
           <input type='radio' name='room' value={{.}}>{{.}}</input/><br/>
         {{/rooms}}
-        <input type="submit" value="Go!">
-      </form> -->
+        
+        <input type="text" name="username" autocomplete="off" placeholder="{{username}}" value="{{username}}" />
+        <button>Join</button>
+      </form>
 
 
     </script>

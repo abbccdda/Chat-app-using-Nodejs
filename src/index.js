@@ -36,7 +36,8 @@ io.on("connection", (socket) => {
 
         io.to(user.room).emit("roomData", {
             room: user.room,
-            users: getUserInRoom(user.room)
+            users: getUserInRoom(user.room),
+            username: user.username
         })
         cb()
     })
@@ -62,7 +63,8 @@ io.on("connection", (socket) => {
 
             io.to(user.room).emit("roomData", {
                 room: user.room,
-                users: getUserInRoom(user.room)
+                users: getUserInRoom(user.room),
+                username: user.username
             })
         }
 
@@ -71,5 +73,5 @@ io.on("connection", (socket) => {
 
 })
 server.listen(PORT, () => {
-    console.log("server s up" + PORT)
+    console.log("server is up at " + PORT)
 })
