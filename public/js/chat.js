@@ -60,9 +60,16 @@ socket.on("locationurl", (loc) => {
 })
 
 socket.on("roomData", ({ room, users }) => {
+    const roomSet = new Set()
+    users.forEach((user) => {
+        roomSet.add(user.room)
+    })
+    const rooms = Array.from(roomSet)
+
     const html = Mustache.render(sidebartemplate, {
         room,
-        users
+        users,
+        rooms
     })
     document.querySelector('#sidebar').innerHTML = html
 })
@@ -84,9 +91,6 @@ $msgForm.addEventListener("submit", (e) => {
         console.log('Message delivered!')
     })
 })
-
-// const $msgForm=document.querySelector("#user") 
-
 
 $geoLocationButton.addEventListener("click", () => {
     if (!navigator.geolocation) {

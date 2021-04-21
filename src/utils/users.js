@@ -1,5 +1,4 @@
 const users = []
-const rooms = []
 
 const randomUsernames = []
 const lineReader = require('line-reader');
@@ -15,6 +14,7 @@ const addUser = ({ id, username, room}) => {
 
     //validate data
     if (!username || !room) {
+        console.log("User: %s, Room: %s", username, room)
         return {
             error: 'Username and room are required!'
         }
@@ -22,7 +22,7 @@ const addUser = ({ id, username, room}) => {
 
     //check for existing users
     const existingUser = users.find((user) => {
-        return user.room == room && user.username == username
+        return user.username == username
     })
 
     //validate username
@@ -31,7 +31,6 @@ const addUser = ({ id, username, room}) => {
             error: "username ${userName} already used"
         }
     }
-
    
     var displayName = null
     while (displayName == null) {
@@ -50,13 +49,6 @@ const addUser = ({ id, username, room}) => {
     const user = { id, username, displayName, room }
 
     users.push(user)
-
-    // Create a new room
-    if (!rooms.find((room) => {
-        return room == user.room
-    })) {
-        rooms.push(user.room)
-    }    
     
     return { user }
 }
